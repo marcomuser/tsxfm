@@ -1,0 +1,56 @@
+{
+  "name": "tsxfm",
+  "version": "1.0.0",
+  "license": "MIT",
+  "description": "Node.js loader hook to transpile TypeScript files on-the-fly with esbuild",
+  "keywords": [
+    "node",
+    "loader",
+    "typescript",
+    "esm",
+    "esbuild"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/marcomuser/tsxfm"
+  },
+  "author": "Marco Muser",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "files": [
+    "src"
+  ],
+  "main": "./src/main.js",
+  "exports": "./src/main.js",
+  "scripts": {
+    "format": "prettier --write .",
+    "lint": "eslint --max-warnings 0 'src/**'",
+    "prepare": "husky install",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "eslint": "^8.51.0",
+    "eslint-config-prettier": "^9.0.0",
+    "husky": "^8.0.3",
+    "prettier": "^3.0.3"
+  },
+  "peerDependencies": {
+    "esbuild": ">=0.19"
+  },
+  "prettier": {},
+  "eslintConfig": {
+    "parserOptions": {
+      "ecmaVersion": "latest",
+      "sourceType": "module"
+    },
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "eslint:recommended",
+      "prettier"
+    ]
+  }
+}
