@@ -1,4 +1,5 @@
 import process from "node:process";
+import { fileURLToPath } from "node:url";
 import { transform } from "esbuild";
 
 const tsExtensionsRegex = /\.(ts|mts)$/;
@@ -10,7 +11,9 @@ export async function load(url, context, nextLoad) {
     const transformedSource = await transform(source.toString(), {
       target: "esnext",
       loader: "ts",
+      tsconfigRaw: `{"compilerOptions":{"verbatimModuleSyntax":true}}`,
       sourcemap: "inline",
+      sourcefile: fileURLToPath(url),
       sourcesContent: (process.env.NODE_ENV ?? "development") !== "production",
     });
 
