@@ -14,10 +14,10 @@ Note: Esbuild is specified as a peer dependency of tsxfm and is therefore instal
 
 ## Usage
 
-Run your scripts as usual with Node.js, but specify a `--module` flag to load tsxfm before the script is executed:
+Run your scripts as usual with Node.js, but specify a `--import` flag to load tsxfm before the script is executed:
 
 ```
-node --module tsxfm ./your-script.ts
+node --import tsxfm ./your-script.ts
 ```
 
 You can also use it in your npm scripts!
