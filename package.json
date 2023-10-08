@@ -2,10 +2,11 @@
   "name": "tsxfm",
   "version": "1.0.0",
   "license": "MIT",
-  "description": "Node.js loader hook to transpile TypeScript files on-the-fly with esbuild",
+  "description": "Node.js loader hooks to transform TypeScript files on-the-fly with esbuild",
   "keywords": [
     "node",
     "loader",
+    "hooks",
     "typescript",
     "esm",
     "esbuild"
@@ -22,8 +23,7 @@
   "files": [
     "src"
   ],
-  "main": "./src/main.js",
-  "exports": "./src/main.js",
+  "exports": "./src/register.js",
   "scripts": {
     "format": "prettier --write .",
     "lint": "eslint --max-warnings 0 'src/**'",
