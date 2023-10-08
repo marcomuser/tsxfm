@@ -1,8 +1,8 @@
 {
   "name": "tsxfm",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "license": "MIT",
-  "description": "Node.js loader hooks to transform TypeScript files on-the-fly with esbuild",
+  "description": "Node.js module hooks to transform TypeScript files on-the-fly with esbuild",
   "keywords": [
     "node",
     "loader",
