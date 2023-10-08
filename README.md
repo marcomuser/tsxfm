@@ -28,7 +28,7 @@ tsxfm requires Node.js 20+ and that your project is written with ES Modules. Thi
 
 tsxfm also requires TypeScript 5.2+ and your tsconfig.json to include the following settings to ensure that the project fully follows the modern Node.js ES Modules resolution rules:
 
-```json
+```jsonc
 {
   /* Specify what module code is generated. */
   "module": "NodeNext",
