@@ -20,24 +20,26 @@ Run your scripts as usual with Node.js, but specify a `--import` flag to load ts
 node --import tsxfm ./your-script.ts
 ```
 
+For watch mode, we simply pass the `--watch` flag, which is built right into Node.js:
+
+```
+node --watch --import tsxfm ./your-script.ts
+```
+
 You can also use it in your npm scripts!
 
 ## Requirements
 
 tsxfm requires Node.js 20+ and that your project is written with ES Modules. This means that you must either specify `"type": "module"` in your package.json or use `.mts` file extensions.
 
-tsxfm also requires TypeScript 5.2+ and your tsconfig.json to include the following settings to ensure that the project fully follows the modern Node.js ES Modules resolution rules:
+It is also strongly recommended to use TypeScript 5.2+ with the following settings included in your tsconfig.json file to ensure that your project fully follows the modern Node.js ES Modules resolution rules:
 
 ```jsonc
 {
-  /* Specify what module code is generated. */
+  /* Set the module system for the program to reflect Node's native ES Modules support. */
   "module": "NodeNext",
-  /* Ensure that each file can be safely transpiled without relying on other imports. */
-  "isolatedModules": true,
   /* Do not transform or elide any imports or exports not marked as type-only, ensuring they are written in the output file's format based on the 'module' setting. */
-  "verbatimModuleSyntax": true,
-  /* Emit additional JavaScript to ease support for importing CommonJS modules. This enables 'allowSyntheticDefaultImports' for type compatibility. */
-  "esModuleInterop": true
+  "verbatimModuleSyntax": true
 }
 ```
 
