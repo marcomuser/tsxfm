@@ -24,15 +24,19 @@
     "src"
   ],
   "exports": "./src/register.js",
+  "imports": {
+    "#tsxfm": "./src/register.js"
+  },
   "scripts": {
     "format": "prettier --write .",
     "lint": "eslint --max-warnings 0 'src/**'",
     "prepare": "husky install",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node --test tests/"
   },
   "devDependencies": {
     "@changesets/changelog-github": "^0.4.8",
     "@changesets/cli": "^2.26.2",
+    "@types/node": "^20.8.6",
     "eslint": "^8.51.0",
     "eslint-config-prettier": "^9.0.0",
     "husky": "^8.0.3",
