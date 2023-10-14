@@ -1,0 +1,7 @@
+{
+  "type": "module",
+  "imports": {
+    "#depWithTsExt": "./tsDependency.ts",
+    "#depWithJsExt": "./tsDependency.js"
+  }
+}
