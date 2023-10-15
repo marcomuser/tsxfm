@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 
 await import("#tsxfm");
 
-describe("ts scripting", async () => {
+describe("ts transform", async () => {
   it("transforms hello world typescript function", async () => {
     const { helloWorld } = await import("./helloWorld.js");
 
