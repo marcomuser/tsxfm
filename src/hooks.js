@@ -18,6 +18,18 @@ export async function resolve(specifier, context, nextResolve) {
     }
   }
 
+  if (specifier.startsWith("#")) {
+    try {
+      return await nextResolve(specifier, context);
+    } catch (error) {
+      if (error.code === "ERR_MODULE_NOT_FOUND") {
+        return nextResolve(replaceJsExt(error.url), context);
+      }
+
+      throw error;
+    }
+  }
+
   return nextResolve(specifier, context);
 }
 
