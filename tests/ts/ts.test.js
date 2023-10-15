@@ -40,12 +40,11 @@ describe("ts transform", async () => {
     assert(mts(), "hello world!");
   });
 
-  // Comment this test in when implementing https://github.com/marcomuser/tsxfm/issues/10
-  /* it("transforms subpath import with .js file extension", async () => {
+  it("transforms subpath import with .js file extension", async () => {
     const { subpathWithJsExt } = await import("./subpath/subpathWithJsExt.js");
 
     assert.equal(subpathWithJsExt(), "hello world!");
-  }); */
+  });
 
   it("transforms subpath import with .ts file extension", async () => {
     const { subpathWithTsExt } = await import("./subpath/subpathWithTsExt.js");
