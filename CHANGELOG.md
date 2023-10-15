@@ -1,5 +1,13 @@
 # tsxfm
 
+## 1.0.2
+
+### Patch Changes
+
+- [#8](https://github.com/marcomuser/tsxfm/pull/8) [`439095e`](https://github.com/marcomuser/tsxfm/commit/439095e36a6db843c5842eed3328b9fb9bb7b73e) Thanks [@marcomuser](https://github.com/marcomuser)! - Update tsconfig.json recommendations and usage section in readme
+
+- [#11](https://github.com/marcomuser/tsxfm/pull/11) [`fe714e0`](https://github.com/marcomuser/tsxfm/commit/fe714e06d665a7280e44154ae44bfd35b504e055) Thanks [@marcomuser](https://github.com/marcomuser)! - Handle imports with querystrings
+
 ## 1.0.1
 
 ### Patch Changes
