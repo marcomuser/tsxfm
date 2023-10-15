@@ -53,7 +53,7 @@ describe("ts transform", async () => {
     assert.equal(subpathWithTsExt(), "hello world!");
   });
 
-  it("handles imports with search params", async () => {
+  it("transforms imports with search params", async () => {
     // @ts-expect-error TypeScript 5.2 does not support this even though Node.js does
     const { searchParams } = await import("./searchParams.js?hello=world");
 
