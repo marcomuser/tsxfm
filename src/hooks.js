@@ -6,7 +6,7 @@ import { transform } from "esbuild";
 export async function resolve(specifier, context, nextResolve) {
   const ext = extname(specifier);
 
-  if (ext === ".js" || ext === ".mjs") {
+  if (ext.startsWith(".js") || ext.startsWith(".mjs")) {
     try {
       return await nextResolve(specifier, context);
     } catch (error) {
@@ -24,7 +24,7 @@ export async function resolve(specifier, context, nextResolve) {
 export async function load(url, context, nextLoad) {
   const ext = extname(url);
 
-  if (ext === ".ts" || ext === ".mts") {
+  if (ext.startsWith(".ts") || ext.startsWith(".mts")) {
     const { source } = await nextLoad(url, { ...context, format: "module" });
 
     const transformedSource = await transform(source.toString(), {
@@ -47,6 +47,6 @@ export async function load(url, context, nextLoad) {
 }
 
 const replaceJsExt = (specifier) =>
-  specifier.replace(/\.(js|mjs)$/, (_, ext) => {
-    return ext === "mjs" ? ".mts" : ".ts";
+  specifier.replace(/\.(js|mjs)(\?.*)?$/, (_, ext, query = "") => {
+    return ext === "mjs" ? ".mts" + query : ".ts" + query;
   });

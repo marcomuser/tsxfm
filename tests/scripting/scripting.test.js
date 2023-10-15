@@ -40,15 +40,23 @@ describe("ts scripting", async () => {
     assert(mts(), "hello world!");
   });
 
-  // it("transforms subpath import with .js file extension", async () => {
-  //   const { subpathWithJsExt } = await import("./subpath/subpathWithJsExt.js");
+  // Comment this test in when implementing https://github.com/marcomuser/tsxfm/issues/10
+  /* it("transforms subpath import with .js file extension", async () => {
+    const { subpathWithJsExt } = await import("./subpath/subpathWithJsExt.js");
 
-  //   assert.equal(subpathWithJsExt(), "hello world!");
-  // });
+    assert.equal(subpathWithJsExt(), "hello world!");
+  }); */
 
   it("transforms subpath import with .ts file extension", async () => {
     const { subpathWithTsExt } = await import("./subpath/subpathWithTsExt.js");
 
     assert.equal(subpathWithTsExt(), "hello world!");
+  });
+
+  it("handles imports with search params", async () => {
+    // @ts-expect-error TypeScript 5.2 does not support this even though Node.js does
+    const { searchParams } = await import("./searchParams.js?hello=world");
+
+    assert.equal(searchParams(), "world");
   });
 });
