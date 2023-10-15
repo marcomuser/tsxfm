@@ -43,7 +43,7 @@ export async function load(url, context, nextLoad) {
     };
   }
 
-  return nextLoad(url);
+  return nextLoad(url, context);
 }
 
 const replaceJsExt = (specifier) =>
