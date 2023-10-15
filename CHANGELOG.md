@@ -1,5 +1,13 @@
 # tsxfm
 
+## 1.0.3
+
+### Patch Changes
+
+- [#14](https://github.com/marcomuser/tsxfm/pull/14) [`f71fff2`](https://github.com/marcomuser/tsxfm/commit/f71fff292d5d1a825bdb208da5f5adfa1c463c99) Thanks [@marcomuser](https://github.com/marcomuser)! - Pass context to default nextLoad
+
+- [#15](https://github.com/marcomuser/tsxfm/pull/15) [`9f49158`](https://github.com/marcomuser/tsxfm/commit/9f49158baa49dfffed17094baf58b787cd823ec4) Thanks [@marcomuser](https://github.com/marcomuser)! - Handle ts subpath imports with .js file extensions
+
 ## 1.0.2
 
 ### Patch Changes
