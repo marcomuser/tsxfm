@@ -1,14 +1,17 @@
-import process from "node:process";
+import { extname } from "node:path";
+import { env } from "node:process";
 import { fileURLToPath } from "node:url";
 import { transform } from "esbuild";
 
 export async function resolve(specifier, context, nextResolve) {
-  if (jsExtensionsRegex.test(specifier)) {
+  const ext = extname(specifier);
+
+  if (ext.startsWith(".js") || ext.startsWith(".mjs")) {
     try {
       return await nextResolve(specifier, context);
     } catch (error) {
       if (error.code === "ERR_MODULE_NOT_FOUND") {
-        return nextResolve(jsSpecifierReplacer(specifier), context);
+        return nextResolve(replaceJsExt(specifier), context);
       }
 
       throw error;
@@ -19,7 +22,9 @@ export async function resolve(specifier, context, nextResolve) {
 }
 
 export async function load(url, context, nextLoad) {
-  if (tsExtensionsRegex.test(url)) {
+  const ext = extname(url);
+
+  if (ext.startsWith(".ts") || ext.startsWith(".mts")) {
     const { source } = await nextLoad(url, { ...context, format: "module" });
 
     const transformedSource = await transform(source.toString(), {
@@ -28,7 +33,7 @@ export async function load(url, context, nextLoad) {
       tsconfigRaw: `{"compilerOptions":{"verbatimModuleSyntax":true}}`,
       sourcemap: "inline",
       sourcefile: fileURLToPath(url),
-      sourcesContent: (process.env.NODE_ENV ?? "development") !== "production",
+      sourcesContent: (env.NODE_ENV ?? "development") !== "production",
     });
 
     return {
@@ -41,10 +46,7 @@ export async function load(url, context, nextLoad) {
   return nextLoad(url);
 }
 
-const jsExtensionsRegex = /\.(js|mjs)$/;
-const tsExtensionsRegex = /\.(ts|mts)$/;
-
-const jsSpecifierReplacer = (specifier) =>
-  specifier.replace(jsExtensionsRegex, (_, extension) => {
-    return extension === "mjs" ? ".mts" : ".ts";
+const replaceJsExt = (specifier) =>
+  specifier.replace(/\.(js|mjs)(\?.*)?$/, (_, ext, query = "") => {
+    return ext === "mjs" ? ".mts" + query : ".ts" + query;
   });
