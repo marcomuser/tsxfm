@@ -1,5 +1,11 @@
 # tsxfm
 
+## 1.0.4
+
+### Patch Changes
+
+- [#18](https://github.com/marcomuser/tsxfm/pull/18) [`1041c54`](https://github.com/marcomuser/tsxfm/commit/1041c5426bdbd0648e3c8259efdc93c45dccc012) Thanks [@marcomuser](https://github.com/marcomuser)! - Bundle type declarations
+
 ## 1.0.3
 
 ### Patch Changes
