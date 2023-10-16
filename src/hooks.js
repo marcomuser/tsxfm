@@ -6,19 +6,11 @@ import { transform } from "esbuild";
 export async function resolve(specifier, context, nextResolve) {
   const ext = extname(specifier);
 
-  if (ext.startsWith(".js") || ext.startsWith(".mjs")) {
-    try {
-      return await nextResolve(specifier, context);
-    } catch (error) {
-      if (error.code === "ERR_MODULE_NOT_FOUND") {
-        return nextResolve(replaceJsExt(specifier), context);
-      }
-
-      throw error;
-    }
-  }
-
-  if (specifier.startsWith("#")) {
+  if (
+    ext.startsWith(".js") ||
+    ext.startsWith(".mjs") ||
+    specifier.startsWith("#")
+  ) {
     try {
       return await nextResolve(specifier, context);
     } catch (error) {
