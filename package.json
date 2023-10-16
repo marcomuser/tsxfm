@@ -23,7 +23,12 @@
   "files": [
     "src"
   ],
-  "exports": "./src/register.js",
+  "main": "./src/register.js",
+  "types": "./src/register.d.ts",
+  "exports": {
+    "types": "./src/register.d.ts",
+    "default": "./src/register.js"
+  },
   "imports": {
     "#tsxfm": "./src/register.js"
   },
