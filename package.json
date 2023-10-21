@@ -34,7 +34,7 @@
   },
   "scripts": {
     "format": "prettier --write .",
-    "lint": "eslint --max-warnings 0 'src/**'",
+    "lint": "eslint --max-warnings 0 \"{src,tests}/**/*.js\"",
     "prepare": "husky install",
     "test": "node --test tests/"
   },
