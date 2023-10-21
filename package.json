@@ -50,6 +50,9 @@
   "peerDependencies": {
     "esbuild": ">=0.19"
   },
+  "dependencies": {
+    "get-tsconfig": "^4.7.2"
+  },
   "prettier": {},
   "eslintConfig": {
     "parserOptions": {
