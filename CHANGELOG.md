@@ -1,5 +1,11 @@
 # tsxfm
 
+## 1.1.0
+
+### Minor Changes
+
+- [#20](https://github.com/marcomuser/tsxfm/pull/20) [`b867a83`](https://github.com/marcomuser/tsxfm/commit/b867a834571ca93101802a5dbe9a2c9fdce13257) Thanks [@marcomuser](https://github.com/marcomuser)! - Enable configuration via tsconfig
+
 ## 1.0.4
 
 ### Patch Changes
