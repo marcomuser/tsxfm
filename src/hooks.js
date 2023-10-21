@@ -1,7 +1,13 @@
-import { extname } from "node:path";
+import { extname, resolve as resolvePath } from "node:path";
 import { env } from "node:process";
 import { fileURLToPath } from "node:url";
 import { transform } from "esbuild";
+import { createFilesMatcher, getTsconfig, parseTsconfig } from "get-tsconfig";
+
+const replaceJsExt = (specifier) =>
+  specifier.replace(/\.(js|mjs)(\?.*)?$/, (_, ext, query = "") => {
+    return ext === "mjs" ? ".mts" + query : ".ts" + query;
+  });
 
 export async function resolve(specifier, context, nextResolve) {
   const ext = extname(specifier);
@@ -25,18 +31,31 @@ export async function resolve(specifier, context, nextResolve) {
   return nextResolve(specifier, context);
 }
 
+const tsconfig = env.TSXFM_TSCONFIG_PATH
+  ? {
+      path: resolvePath(env.TSXFM_TSCONFIG_PATH),
+      config: parseTsconfig(env.TSXFM_TSCONFIG_PATH),
+    }
+  : getTsconfig();
+
+const tsconfigFilesMatcher = tsconfig && createFilesMatcher(tsconfig);
+
 export async function load(url, context, nextLoad) {
   const ext = extname(url);
 
   if (ext.startsWith(".ts") || ext.startsWith(".mts")) {
     const { source } = await nextLoad(url, { ...context, format: "module" });
 
+    const filePath = fileURLToPath(url);
+
     const transformedSource = await transform(source.toString(), {
       target: "esnext",
       loader: "ts",
-      tsconfigRaw: `{"compilerOptions":{"verbatimModuleSyntax":true}}`,
+      tsconfigRaw: tsconfigFilesMatcher
+        ? tsconfigFilesMatcher(filePath)
+        : undefined,
       sourcemap: "inline",
-      sourcefile: fileURLToPath(url),
+      sourcefile: filePath,
       sourcesContent: (env.NODE_ENV ?? "development") !== "production",
     });
 
@@ -49,8 +68,3 @@ export async function load(url, context, nextLoad) {
 
   return nextLoad(url, context);
 }
-
-const replaceJsExt = (specifier) =>
-  specifier.replace(/\.(js|mjs)(\?.*)?$/, (_, ext, query = "") => {
-    return ext === "mjs" ? ".mts" + query : ".ts" + query;
-  });

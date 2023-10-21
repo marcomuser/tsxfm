@@ -10,7 +10,7 @@ tsxfm is short for TypeScript transform. It provides minimal [Node.js module hoo
 npm install -D tsxfm esbuild
 ```
 
-Note: Esbuild is specified as a peer dependency of tsxfm and is therefore installed separately, giving you control over which version of esbuild you want to use and when you want to upgrade it.
+Note: esbuild is specified as a peer dependency of tsxfm and is therefore installed separately, giving you control over which version of esbuild you want to use and when you want to upgrade it.
 
 ## Usage
 
@@ -47,11 +47,19 @@ It is also strongly recommended to use TypeScript 5.2+ with the following settin
 
 ### How do I configure this?
 
-You don't! tsxfm does not offer any configuration options.
+The tsxfm tool is designed to be straightforward and minimalistic, and as such, it does not introduce any additional configuration options of its own.
 
-### How do I do Subpath imports?
+By default, tsxfm attempts to locate a `tsconfig.json` file starting from the current working directory. When found, it uses the configuration options defined in the tsconfig and shares them with esbuild. It's important to note that not all tsconfig options have a direct impact on the transformation process. For specific details on which options are respected and how they affect the transformation process, please refer to the [esbuild documentation](https://esbuild.github.io/content-types/#tsconfig-json).
 
-Use [Node.js subpath imports](https://nodejs.org/api/packages.html#subpath-imports) in your package.json. They are natively supported by Node.js, TypeScript, esbuild and similar build tools. Node.js subpath imports should be preferred over TypeScript paths mappings for the same reason [why ts-node](https://typestrong.org/ts-node/docs/paths#why-is-this-not-built-in-to-ts-node) does not natively support the latter.
+If tsxfm cannot automatically locate your tsconfig.json file, you can define the `TSXFM_TSCONFIG_PATH` environment variable. This variable lets you explicitly set the path to your TypeScript configuration file relative to the current working directory.
+
+### How should I create module path mappings?
+
+In your project, it's recommended to adopt [Node.js subpath imports](https://nodejs.org/api/packages.html#subpath-imports) configured in your package.json. These subpath imports are natively supported by Node.js, TypeScript, esbuild and similar build tools.
+
+This preference for subpath imports over TypeScript path mappings is driven by the original design of the paths feature. Paths in TypeScript serve to describe module mappings that are expected to already be handled by the targeted runtime. This design encourages the use of imports that Node.js natively understands.
+
+As a practical implication, tsxfm (like [ts-node](https://typestrong.org/ts-node/docs/paths#why-is-this-not-built-in-to-ts-node)) adheres to this design philosophy and does not alter Node.js' module resolution behavior to implement TypeScript paths mappings. By adopting subpath imports in your package.json, you ensure that your project seamlessly integrates with the broader Node.js ecosystem.
 
 ### How is `tsxfm` different from [`tsx`](https://github.com/esbuild-kit/tsx)?
 
@@ -59,4 +67,4 @@ tsx is great! It's very keen on facilitating interoperability between ESM and CJ
 
 ### Does it do type-checking?
 
-Same answer as for [tsx](https://github.com/esbuild-kit/tsx#does-it-do-type-checking): No, esbuild does not support type checking. It's recommended to run TypeScript separately as a command (`tsc --noEmit`) or via [IDE IntelliSense](https://code.visualstudio.com/docs/languages/typescript).
+No, esbuild does not support type checking. It's recommended to run TypeScript separately via `tsc --noEmit`.
