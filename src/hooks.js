@@ -1,8 +1,8 @@
-import { extname } from "node:path";
+import { extname, resolve as resolvePath } from "node:path";
 import { env } from "node:process";
 import { fileURLToPath } from "node:url";
 import { transform } from "esbuild";
-import { getTsconfig, createFilesMatcher } from "get-tsconfig";
+import { createFilesMatcher, getTsconfig, parseTsconfig } from "get-tsconfig";
 
 const replaceJsExt = (specifier) =>
   specifier.replace(/\.(js|mjs)(\?.*)?$/, (_, ext, query = "") => {
@@ -31,7 +31,13 @@ export async function resolve(specifier, context, nextResolve) {
   return nextResolve(specifier, context);
 }
 
-const tsconfig = getTsconfig(env.TSXFM_TSCONFIG_PATH ?? undefined);
+const tsconfig = env.TSXFM_TSCONFIG_PATH
+  ? {
+      path: resolvePath(env.TSXFM_TSCONFIG_PATH),
+      config: parseTsconfig(env.TSXFM_TSCONFIG_PATH),
+    }
+  : getTsconfig();
+
 const tsconfigFilesMatcher = tsconfig && createFilesMatcher(tsconfig);
 
 export async function load(url, context, nextLoad) {
