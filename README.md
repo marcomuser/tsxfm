@@ -39,7 +39,7 @@ It is also strongly recommended to use TypeScript 5.2+ with the following settin
   /* Set the module system for the program to reflect Node's native ES Modules support. */
   "module": "NodeNext",
   /* Do not transform or elide any imports or exports not marked as type-only, ensuring they are written in the output file's format based on the 'module' setting. */
-  "verbatimModuleSyntax": true
+  "verbatimModuleSyntax": true,
 }
 ```
 
