@@ -35,36 +35,24 @@
   "scripts": {
     "format": "prettier --write .",
     "lint": "eslint --max-warnings 0 \"{src,tests}/**/*.js\"",
-    "prepare": "husky install",
+    "prepare": "husky",
     "test": "node --env-file ./tests/config.env --test tests/"
   },
   "devDependencies": {
-    "@changesets/changelog-github": "^0.4.8",
-    "@changesets/cli": "^2.26.2",
-    "@types/node": "^20.8.7",
-    "eslint": "^8.52.0",
-    "eslint-config-prettier": "^9.0.0",
-    "husky": "^8.0.3",
-    "prettier": "^3.0.3"
+    "@changesets/changelog-github": "^0.5.0",
+    "@changesets/cli": "^2.27.1",
+    "@types/node": "^20.12.5",
+    "eslint": "^9.0.0",
+    "eslint-config-prettier": "^9.1.0",
+    "globals": "^15.0.0",
+    "husky": "^9.0.11",
+    "prettier": "^3.2.5"
   },
   "peerDependencies": {
     "esbuild": ">=0.19"
   },
   "dependencies": {
-    "get-tsconfig": "^4.7.2"
+    "get-tsconfig": "^4.7.3"
   },
-  "prettier": {},
-  "eslintConfig": {
-    "parserOptions": {
-      "ecmaVersion": "latest",
-      "sourceType": "module"
-    },
-    "env": {
-      "node": true
-    },
-    "extends": [
-      "eslint:recommended",
-      "prettier"
-    ]
-  }
+  "prettier": {}
 }
