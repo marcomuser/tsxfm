@@ -1,5 +1,11 @@
 # tsxfm
 
+## 1.1.1
+
+### Patch Changes
+
+- [#25](https://github.com/marcomuser/tsxfm/pull/25) [`11f99cb`](https://github.com/marcomuser/tsxfm/commit/11f99cb810e5968ca4b1c667d0e9b582a99682e6) Thanks [@marcomuser](https://github.com/marcomuser)! - Update get-tsconfig dependency
+
 ## 1.1.0
 
 ### Minor Changes
