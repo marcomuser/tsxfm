@@ -35,7 +35,7 @@
   "scripts": {
     "format": "prettier --write .",
     "lint": "eslint --max-warnings 0 \"{src,tests}/**/*.js\"",
-    "prepare": "husky install",
+    "prepare": "husky",
     "test": "node --env-file ./tests/config.env --test tests/"
   },
   "devDependencies": {
